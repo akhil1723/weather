@@ -1,0 +1,24 @@
+#card{
+    background-image: url(./card.png);
+    font-weight: bold;
+}
+#temp{
+    background-image: url(./heat.jpg);
+    font-weight: bold;
+}
+#wet{
+    background-image: url(.//download.jpg);
+    font-weight: bold;
+}
+#wind{
+    background-image: url(./wind.jpg);
+    font-weight: bold;
+}
+#lat{
+    background-image: url(./lat.jpg);
+    font-weight: bold;
+}
+#lon{
+    background-image: url(./long.jpg);
+    font-weight: bold; 
+}
