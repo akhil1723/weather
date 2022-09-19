@@ -5,27 +5,63 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+        <link rel="stylesheet" href="./weather.css">
 </head>
-<body>
-    <!-- document object model --dom -->
-    <!-- static to dynamic => dom -->
-    <!-- document give behaviour to web pages -->
+<body style="background-image:url(./pexels-tahir-shaw-186980.jpg) ;background-repeat: no-repeat;background-size: cover;">
+    <div class="container w-50  mt-5" >
+        <div class="row p-5">
+            <div class="col-3">
 
+            </div>
+            <div class="col-md-6 col-lg-7 col-sm-12 mt-3" >
+                <input id="cname" type="text" placeholder="Enter your place" class="form-control" > <br>
+                <button  class="btn btn-info mb-3" type="button" onclick="search()">Search</button>
+            </div>
+            <div class="col-3">
 
-    <!-- selectors in javascript -->
-    <h1 class="ac">DOM1</h1>
-    <h1 id="ab">DOM 2</h1>
-    <h1 class="ac">DOM3</h1>
-    
-
-    <ul>
-        <li>1.using tagname=document.getElementByTagName('tagname')</li>
-        <li>2.using id=document.getElementById('id')</li>
-        <li>3.using id=document.getElementByClassName('classname')</li>
-        <li>4.using id=document.querySelector('id','classname','tagname')</li>
-
-    </ul>
-                             
+            </div>
+        </div>
+    </div>
+    <div  class="container" >
+    <div class="row">
+        <div class="col-4 "></div>
+        <div class="col-4 col-sm-12 col-xs-12 col-lg-4 col-md-4 " id="result"></div>
+        <div class="col-4"></div>
+    </div>
+</div>
 </body>
+<script>
+    function search() {
+        place=cname.value
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${place}&appid=5b4bee0ba241d092159faf007e166080`).then(res => res.json())
+            .then(data => display(data))
+    }
+    function display(weatherDetails) {
+        cname =weatherDetails.name
+        temperature=weatherDetails.main['temp']
+        weathertype=weatherDetails.weather[0].main
+        Windspeed=weatherDetails.wind['speed']
+        latitude=weatherDetails.coord['lat']
+        longitude=weatherDetails.coord['lon']
+            
+
+            htmldata=`<div class="card" style="width: 18rem;">
+               
+  <div id="card" class="card-body">
+    <h5 class="card-title">${cname}${" Today"}</h5>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li id="temp" class="list-group-item">${"Temperature: "}${temperature}</li>
+    <li id="wet" class="list-group-item">${"Weather Type: "}${weathertype}</li>
+    <li id="wind" class="list-group-item">${"Wind Speed: "}${Windspeed}</li>
+    <li id="lat" class="list-group-item">${"Latitude: "}${latitude}</li>
+    <li id="lon" class="list-group-item">${"Longitude: "}${longitude}</li>
+    
+  </ul>
+</div>`
+result.innerHTML=htmldata
+    }
+</script>
 </html>
